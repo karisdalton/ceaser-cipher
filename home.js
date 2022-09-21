@@ -1,5 +1,7 @@
 let form = document.querySelector("#form");
 let card = document.querySelector('.hidden');
+let copyBtn = document.querySelector("#cpy-btn");
+let copyText = document.querySelector(".card-text");
 
 document.addEventListener('DOMContentLoaded', () => {
     card.style.display = 'none';
@@ -18,8 +20,7 @@ form.addEventListener("submit", (e) => {
   let upload = document.querySelector("#choose-file");
   let key = document.querySelector("#key").value;
   let mode = document.querySelector("#mode").value;
-  let copyBtn = document.querySelector("#cpy-btn");
-  let copyText = document.querySelector("#cipher");
+
 
   let messageString = Array.from(message);
   let uploadString = Array.from(upload);
@@ -59,16 +60,18 @@ form.addEventListener("submit", (e) => {
     let list = document.querySelector("#cipher").innerHTML = translated;
     card.style.display = 'block';
 
-    copyBtn.addEventListener('click', () => {
-        //select the text field
-        copyText.select();
-        copyText.setSelectionRange(0, 99999);
-
-        //copy the encrypted/decrypted text
-        navigator.clipboard.writeText(copyText.value);
-
-        // clear the fields after copying the text
-        list.innerHTML = "";
-    })
     
 });
+
+// Copy Encrypted/Decrypted text
+copyBtn.addEventListener('click', () => {
+    //select the text field
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+
+    //copy the encrypted/decrypted text
+    navigator.clipboard.writeText(copyText.value);
+
+    // clear the fields after copying the text
+    list.innerHTML = "";
+})
