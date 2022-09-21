@@ -18,6 +18,7 @@ form.addEventListener("submit", (e) => {
   let upload = document.querySelector("#choose-file");
   let key = document.querySelector("#key").value;
   let mode = document.querySelector("#mode").value;
+  let copyText = document.querySelector("#cpy-btn");
 
   let messageString = Array.from(message);
   let uploadString = Array.from(upload);
@@ -56,5 +57,15 @@ form.addEventListener("submit", (e) => {
 
     let list = document.querySelector("#cipher").innerHTML = translated;
     card.style.display = 'block';
+
+    //select the text field
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+
+    //copy the encrypted/decrypted text
+    navigator.clipboard.writeText(copyText.value);
+
+    // clear the fields after copying the text
+    list.innerHTML = "";
     
 });
