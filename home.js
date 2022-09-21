@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 // Every possible symbol that can be encrypted:
 const SYMBOLS =
-  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890 !?.`~@#$%^&*()_+-=[]{}|;:<>,/";
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890 !?.`~@#$%^&*()_+-=[]{}|;:<>,\\/\"'";
 
 // store the encrypted/decrypted message:
 let translated = "";
@@ -18,7 +18,8 @@ form.addEventListener("submit", (e) => {
   let upload = document.querySelector("#choose-file");
   let key = document.querySelector("#key").value;
   let mode = document.querySelector("#mode").value;
-  let copyText = document.querySelector("#cpy-btn");
+  let copyBtn = document.querySelector("#cpy-btn");
+  let copyText = document.querySelector("#cipher");
 
   let messageString = Array.from(message);
   let uploadString = Array.from(upload);
@@ -58,14 +59,16 @@ form.addEventListener("submit", (e) => {
     let list = document.querySelector("#cipher").innerHTML = translated;
     card.style.display = 'block';
 
-    //select the text field
-    copyText.select();
-    copyText.setSelectionRange(0, 99999);
+    copyBtn.addEventListener('click', () => {
+        //select the text field
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
 
-    //copy the encrypted/decrypted text
-    navigator.clipboard.writeText(copyText.value);
+        //copy the encrypted/decrypted text
+        navigator.clipboard.writeText(copyText.value);
 
-    // clear the fields after copying the text
-    list.innerHTML = "";
+        // clear the fields after copying the text
+        list.innerHTML = "";
+    })
     
 });
